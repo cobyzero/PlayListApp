@@ -45,18 +45,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   textLoginUser() {
-    return Row(
-      children: [
-        const Text(
-          "Usando ",
-          style: TextStyle(color: Colors.grey),
-        ),
-        Text(
-          email.text,
-          style: const TextStyle(color: Colors.white),
-        ),
-        const Text(" para iniciar sesion.", style: TextStyle(color: Colors.grey))
-      ],
+    return SizedBox(
+      height: 20,
+      width: double.infinity,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          const Text(
+            "Usando ",
+            style: TextStyle(color: Colors.grey),
+          ),
+          Text(
+            email.text,
+            style: const TextStyle(color: Colors.white),
+          ),
+          const Text(" para iniciar sesion.", style: TextStyle(color: Colors.grey))
+        ],
+      ),
     );
   }
 
