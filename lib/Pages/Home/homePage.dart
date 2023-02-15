@@ -1,77 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:playlist_app/Common/colors.dart';
-import 'package:playlist_app/Pages/Home/Widgets/botonesHome.dart';
+import 'package:playlist_app/Common/common.dart';
+import 'package:playlist_app/Pages/Home/Widgets/appBarHome.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.gray900(),
-      body: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [imagenLogo(context), textoBienvenida(), botones(context), textTerminos()],
-        ),
+      body: SafeArea(
+        child: Container(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [const AppBarHome(), textoBienvenida(), seccionBase()],
+            )),
       ),
     );
   }
 
-  Column botones(BuildContext context) {
+  Column seccionBase() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        botonCorreo(context),
-        botonFacebook(),
+        const Text(
+          "Populares",
+          style: TextStyle(color: Colors.white, fontSize: 18),
+        ),
+        itemBase()
       ],
     );
   }
 
-  ElevatedButton botonFacebook() {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      icon: const Icon(Icons.facebook),
-      label: const Text("Continuar con Facebook"),
-      style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
-          backgroundColor: Colors.blue,
-          padding: const EdgeInsets.only(left: 40, right: 40)),
+  Container itemBase() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20, right: 10),
+      padding: const EdgeInsets.all(15),
+      width: 170,
+      height: 250,
+      decoration: BoxDecoration(color: MyColors.gray800(), borderRadius: BorderRadius.circular(20)),
+      child: Column(children: [
+        Container(
+          width: double.infinity,
+          height: 140,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: const DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage("lib/Assets/portada.jpg"))),
+        ),
+        Expanded(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              "Mi locura",
+              style: TextStyle(color: Colors.white, fontSize: 17),
+            ),
+            Text(
+              "Sonido de los 90s, rock mejor.",
+              style: TextStyle(color: Colors.grey),
+            )
+          ],
+        ))
+      ]),
     );
   }
 
-  Text textTerminos() {
-    return Text(
-      "Al ingresar estas aceptando nuestros terminos y condiciones.",
-      textAlign: TextAlign.center,
-      style: TextStyle(color: MyColors.gray600()),
-    );
-  }
-
-  botonCorreo(BuildContext context) {
-    return BotonesHome(
-        icon: Icons.email_outlined,
-        texto: "Continuar con correo",
-        function: () {
-          Navigator.pushNamed(context, "/Login");
-        });
-  }
-
-  Image imagenLogo(BuildContext context) {
-    return Image.asset(
-      "lib/Assets/logo.png",
-      width: MediaQuery.of(context).size.width * 0.5,
-      height: MediaQuery.of(context).size.width * 0.5,
-    );
-  }
-
-  Text textoBienvenida() {
-    return const Text(
-      "Bienvenido a la capital de la musica",
-      textAlign: TextAlign.start,
-      style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+  Column textoBienvenida() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Text(
+          "Hello,",
+          style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Sebastian",
+          style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold),
+        )
+      ],
     );
   }
 }

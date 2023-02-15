@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playlist_app/Common/colors.dart';
-import 'package:playlist_app/Common/common.dart';
-import 'package:playlist_app/Pages/Home/Widgets/botonesHome.dart';
+import 'package:playlist_app/Pages/Main/Widgets/botonesMain.dart';
 import 'package:playlist_app/Pages/Login/Widgets/appbarLogin.dart';
 import 'package:playlist_app/Pages/Login/Widgets/formFieldLogin.dart';
 
@@ -16,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   bool active = false;
-
+  bool registrado = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,19 +66,23 @@ class _LoginPageState extends State<LoginPage> {
 
   Center boton(BuildContext context) {
     return Center(
-      child: BotonesHome(
+      child: BotonesMain(
           icon: Icons.email_outlined,
           texto: "Continuar con correo",
           function: () {
-            if (active) {
-              if (email.text.isNotEmpty && password.text.isNotEmpty) {}
-            } else if (!active) {
-              if (email.text.isNotEmpty) {
-                setState(() {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  active = true;
-                });
+            if (registrado) {
+              if (active) {
+                if (email.text.isNotEmpty && password.text.isNotEmpty) {}
+              } else if (!active) {
+                if (email.text.isNotEmpty) {
+                  setState(() {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    active = true;
+                  });
+                }
               }
+            } else if (!registrado) {
+              Navigator.pushNamed(context, "/Register", arguments: email.text);
             }
           }),
     );

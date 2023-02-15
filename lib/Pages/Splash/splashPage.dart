@@ -11,7 +11,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 4)).whenComplete(() {
-      Navigator.pushNamed(context, "/Home");
+      Navigator.pushNamed(context, "/Main");
     });
   }
 

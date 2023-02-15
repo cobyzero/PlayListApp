@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BotonesHome extends StatelessWidget {
-  BotonesHome(
+class BotonesMain extends StatelessWidget {
+  BotonesMain(
       {super.key,
       required this.icon,
       this.color = const Color(0xffd83745),
